@@ -1,32 +1,43 @@
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 import sys
 import json
 
+class Config:
+  def __init__(self, json):
+    self.unit = json['unit']
+    self.buzzer_pin = json['buzzer_pin']
+    self.led_pin = json['led_pin']
+    self.morse_code_map_file_path = json['morse_code_map_file_path']
+
+def load_config():
+  with open("./config.json") as file:
+    return Config(json.load(file))
+
+def load_morse_map(file_path):
+	with open(file_path) as file:
+		return json.load(file)
+
+config = load_config()
+morse_map = load_morse_map(config.morse_code_map_file_path)
+
 # define units and lengths of morse code
-unit = 0.05
+unit = config.unit
 dot_length = 1.0 * unit
 dash_length = 3.0 * unit
 part_space_length = 1.0 * unit
 letter_space_length = 3.0 * unit
 word_space_length = 7.0 * unit
 
-#define the global morse map
-morse_map = {}
-
 # define board constants
-led_pin = 16
-buzzer_pin = 12
+led_pin = config.led_pin
+buzzer_pin = config.buzzer_pin
 buzzer_pwm = None
 
 def validate_arguments():
 	if len(sys.argv) < 2:
 		print("Usage: morse_lights.py <message>")
 		exit(-1)
-
-def load_morse_map():
-	with open("./morse_code_defs/international_morse_code.json") as file:
-		return json.load(file)
 
 def initialize_pi_board():
 	GPIO.setmode(GPIO.BOARD)
