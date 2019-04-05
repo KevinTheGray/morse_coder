@@ -1,4 +1,4 @@
-import RPi.GPIO as GPIO
+# import RPi.GPIO as GPIO
 import time
 import sys
 import json
@@ -46,12 +46,14 @@ def initialize_pi_board():
 	GPIO.setup(buzzer_pin, GPIO.OUT)
 
 def turn_off_light():
-	GPIO.output(led_pin, GPIO.LOW)
-	buzzer_pwm.ChangeDutyCycle(0)
+	print('beep off')
+	# GPIO.output(led_pin, GPIO.LOW)
+	# buzzer_pwm.ChangeDutyCycle(0)
 
 def turn_on_light():
-	GPIO.output(led_pin, GPIO.HIGH)
-	buzzer_pwm.ChangeDutyCycle(1)
+	print('beep on')
+	# GPIO.output(led_pin, GPIO.HIGH)
+	# buzzer_pwm.ChangeDutyCycle(1)
 
 def start_countdown(message):
 	print("Signaling \"" + message + "\" in 2...")
@@ -66,22 +68,27 @@ def run_letter(letter):
 	for index, part in enumerate(code_str):
 		turn_on_light()
 		run_length = dot_length if (part == ".") else dash_length
+		print('sleep for dit or dah length: ' + str(run_length))
 		time.sleep(run_length)
 		turn_off_light()
 		if index != len(code_str) - 1:
+			print('sleep for part space length: ' + str(part_space_length))
 			time.sleep(part_space_length)
 
 
 def run_message(message):
 	words = message.split()
-	for word in words:
+	for word_index, word in enumerate(words):
 		print(word)
-		for letter in word:
+		for letter_index, letter in enumerate(word):
 			run_letter(letter.lower())
-			turn_off_light()
-			time.sleep(letter_space_length)
-		turn_off_light()
-		time.sleep(word_space_length)
+			if letter_index != len(word) - 1:
+				print(len(word) - 1)
+				print('sleep for letter space length: ' + str(letter_space_length))
+				time.sleep(letter_space_length)
+		if word_index != len(words) - 1:
+			print('sleep for word space length: ' + str(word_space_length))
+			time.sleep(word_space_length)
 
 def cleanup():
 	buzzer_pwm.stop()
@@ -89,10 +96,10 @@ def cleanup():
 
 # main
 validate_arguments()
-initialize_pi_board()
-buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
-buzzer_pwm.start(0)
+# initialize_pi_board()
+# buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
+# buzzer_pwm.start(0)
 message = str(sys.argv[1])
 start_countdown(message)
 run_message(message)
-cleanup()
+# cleanup()
