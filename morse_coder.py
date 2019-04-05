@@ -47,13 +47,13 @@ def initialize_pi_board():
 
 def turn_off_light():
 	print('beep off')
-	# GPIO.output(led_pin, GPIO.LOW)
-	# buzzer_pwm.ChangeDutyCycle(0)
+	GPIO.output(led_pin, GPIO.LOW)
+	buzzer_pwm.ChangeDutyCycle(0)
 
 def turn_on_light():
 	print('beep on')
-	# GPIO.output(led_pin, GPIO.HIGH)
-	# buzzer_pwm.ChangeDutyCycle(1)
+	GPIO.output(led_pin, GPIO.HIGH)
+	buzzer_pwm.ChangeDutyCycle(1)
 
 def start_countdown(message):
 	print("Signaling \"" + message + "\" in 2...")
@@ -96,10 +96,10 @@ def cleanup():
 
 # main
 validate_arguments()
-# initialize_pi_board()
-# buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
-# buzzer_pwm.start(0)
+initialize_pi_board()
+buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
+buzzer_pwm.start(0)
 message = str(sys.argv[1])
 start_countdown(message)
 run_message(message)
-# cleanup()
+cleanup()
