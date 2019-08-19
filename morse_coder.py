@@ -61,7 +61,8 @@ def run_letter(letter):
 	for index, part in enumerate(code_str):
 		turn_on_light()
 		run_length = dot_length if (part == ".") else dash_length
-		print('sleep for dit or dah length: ' + str(run_length))
+		beep_type = 'dot' if (part == ".") else 'dah'
+		print('sleep for ' + beep_type + ' length: ' + str(run_length))
 		time.sleep(run_length)
 		turn_off_light()
 		if index != len(code_str) - 1:
