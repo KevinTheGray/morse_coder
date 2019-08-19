@@ -1,6 +1,5 @@
 import RPi.GPIO as GPIO
 import time
-import sys
 import json
 
 class Config:
@@ -84,7 +83,5 @@ buzzer_pin = config.buzzer_pin
 initialize_pi_board()
 buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
 buzzer_pwm.start(0)
-
-run_message('hello')
 
 
