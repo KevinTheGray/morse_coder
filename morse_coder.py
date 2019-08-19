@@ -77,7 +77,6 @@ def run_message(message):
 		for letter_index, letter in enumerate(word):
 			run_letter(letter.lower())
 			if letter_index != len(word) - 1:
-				print(len(word) - 1)
 				print('sleep for letter space length: ' + str(letter_space_length))
 				time.sleep(letter_space_length)
 		if word_index != len(words) - 1:
