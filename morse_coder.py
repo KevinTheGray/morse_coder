@@ -55,13 +55,6 @@ def turn_on_light():
 	GPIO.output(led_pin, GPIO.HIGH)
 	buzzer_pwm.ChangeDutyCycle(1)
 
-def start_countdown(message):
-	print("Signaling \"" + message + "\" in 2...")
-	time.sleep(1.0)
-	print("1...")
-	time.sleep(1.0)
-	print("NOW!")
-
 def run_letter(letter):
 	code_str = morse_map.get(letter, "..--..")
 	print(letter + " : " + code_str)
@@ -100,6 +93,5 @@ initialize_pi_board()
 buzzer_pwm = GPIO.PWM(buzzer_pin, 523)
 buzzer_pwm.start(0)
 message = str(sys.argv[1])
-start_countdown(message)
 run_message(message)
 cleanup()
