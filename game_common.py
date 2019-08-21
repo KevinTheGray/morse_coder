@@ -10,13 +10,13 @@ def getYesOrNoAnswer(prompt):
 def playRound(message, answer_prompt):
   print('=========================================');
   print('Get ready!');
-  time.sleep(0.40)
+  time.sleep(0.30)
   print('3...');
-  time.sleep(0.40)
+  time.sleep(0.30)
   print('2...');
-  time.sleep(0.40)
+  time.sleep(0.30)
   print('1...');
-  time.sleep(0.40)
+  time.sleep(0.30)
   rpi_morse.run_message(message)
   userInput = raw_input(answer_prompt)
   if (len(userInput) == 0):

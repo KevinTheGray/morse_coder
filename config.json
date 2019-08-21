@@ -1,5 +1,5 @@
 {
-  "unit": 0.075,
+  "unit": 0.05,
   "buzzer_pin": 12,
   "led_pin": 16,
   "morse_code_map_file_path": "./morse_code_defs/international_morse_code.json"
