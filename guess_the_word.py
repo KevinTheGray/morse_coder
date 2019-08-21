@@ -4,11 +4,10 @@ import sys
 import random
 import time
 
-lettersList = rpi_morse.morse_map.keys()
-lettersList.remove('?')
+lines = [line.rstrip('\n') for line in open('words.txt')]
 
-def getRandomLetter():
-  return random.choice(lettersList)
+def getRandomWord():
+  return random.choice(lines)
 
 playing = game_common.getYesOrNoAnswer("Ready? (y/n) ")
 totalPlayed = 0
@@ -16,6 +15,6 @@ numCorrect = 0
 
 while(playing):
   totalPlayed += 1
-  numCorrect += 1 if game_common.playRound(getRandomLetter(), 'What letter was that? ') else 0
+  numCorrect += 1 if game_common.playRound(getRandomWord(), 'What word was that? ') else 0
   playing = game_common.getYesOrNoAnswer('Play another round? (y/n) ')
 print('You got ' + str(numCorrect) + ' correct out of ' + str(totalPlayed) + '.') 
