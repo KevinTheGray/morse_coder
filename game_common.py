@@ -19,6 +19,8 @@ def playRound(message, answer_prompt):
   time.sleep(0.40)
   rpi_morse.run_message(message)
   userInput = raw_input(answer_prompt)
+  if (len(userInput) == 0):
+    playRound(message, answer_prompt)
   correct = userInput.lower() == message
   if (correct):
     print('Correct! It was ' + message + '!')
