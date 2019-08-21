@@ -20,7 +20,7 @@ def playRound(message, answer_prompt):
   rpi_morse.run_message(message)
   userInput = raw_input(answer_prompt)
   if (len(userInput) == 0):
-    playRound(message, answer_prompt)
+    return playRound(message, answer_prompt)
   correct = userInput.lower() == message
   if (correct):
     print('Correct! It was ' + message + '!')
